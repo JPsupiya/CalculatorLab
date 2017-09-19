@@ -19,27 +19,33 @@ namespace CPE200Lab1
 
             foreach (string token in parts)
             {
-               
+                //while(isNumber(token) || isOperator(token)) {
                 if (isNumber(token))
                 {
+                    if (double.Parse(token).ToString() != token) return "E";
                     rpnStack.Push(token);
                 }
                 else if (isOperator(token))
                 {
                     //FIXME, what if there is only one left in stack?
+                    if (rpnStack.Count < 2) return "E";
 
                     secondOperand = rpnStack.Pop();
                     firstOperand = rpnStack.Pop();
                     result = calculate(token, firstOperand, secondOperand, 4);
 
-                    result = Convert.ToDouble(result).ToString() ;
+
                     if (result is "E")
                     {
                         return result;
                     }
+
                     rpnStack.Push(result);
                 }
+                else if (token == "") ;
+                else return "E";
             }
+            //}
             //FIXME, what if there is more than one, or zero, items in the stack?
             try {
                 result = rpnStack.Pop();
@@ -48,8 +54,8 @@ namespace CPE200Lab1
                 return "E";
             }
 
-
-            return result;
+            if (rpnStack.Count != 0) return "E";
+            else return Convert.ToDouble(result).ToString();
         }
     }
 }
