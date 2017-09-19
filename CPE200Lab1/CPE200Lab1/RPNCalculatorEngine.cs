@@ -32,7 +32,7 @@ namespace CPE200Lab1
                     firstOperand = rpnStack.Pop();
                     result = calculate(token, firstOperand, secondOperand, 4);
 
-                    result = Convert.ToDouble(result);
+                    result = Convert.ToDouble(result).ToString() ;
                     if (result is "E")
                     {
                         return result;
